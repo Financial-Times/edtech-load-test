@@ -1,1 +1,1 @@
-** GATLING **
+GATLING
