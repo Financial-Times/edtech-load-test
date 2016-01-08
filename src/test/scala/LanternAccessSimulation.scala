@@ -14,6 +14,7 @@ class LanternAccessSimulation extends Simulation {
     .baseURL("http://lantern.ft.com")
 
   val scn = scenario("LanternAccess")
+    .exec(addCookie(Cookie("connect.sid","")))
     .exec(http("Request1")
     .get("/"))
     .pause(5)
