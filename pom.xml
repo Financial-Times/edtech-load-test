@@ -19,10 +19,10 @@
         <encoding>UTF-8</encoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <gatling.version>2.2.0-M3</gatling.version>
+        <gatling.version>2.1.7</gatling.version>
         <gatling-plugin.version>2.1.7</gatling-plugin.version>
         <scala-maven-plugin.version>3.2.2</scala-maven-plugin.version>
-        <scala.version>2.12.0-M3</scala.version>
+        <scala.version>2.11.7</scala.version>
     </properties>
 
     <dependencies>
