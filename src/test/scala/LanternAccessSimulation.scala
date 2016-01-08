@@ -14,7 +14,7 @@ class LanternAccessSimulation extends Simulation {
     .baseURL("http://lantern.ft.com")
 
   val scn = scenario("LanternAccess")
-    .exec(http("req1")
+    .exec(http("Request1")
     .get("/"))
     .pause(5)
 
