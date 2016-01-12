@@ -18,7 +18,7 @@ class LanternAccessSimulation extends Simulation {
   val scn = scenario("LanternAccess")
     .exec(addCookie(Cookie("connect.sid",sessionID)))
     .exec(http("Request1")
-    .get("/realtime/articles/704162f8-b5f1-11e5-b147-e5e5bba42e51"))
+    .get("/realtime/articles/704162f8-b5f1-11e5-b147-e5e5bba42e51" + "?PerfTest"))
     .pause(5)
 
   setUp(
