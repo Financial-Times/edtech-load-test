@@ -12,7 +12,10 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - Modify `RunLanternAccessSimulation.sh` if you need to change how many users login, ramp-up time, etc 
 - Run `sh RunLanternAccessSimulation.sh`
 
+## Done
+- Ramp-up time functionality
+- Send Slack notification on lantern assault
+
 ## Todo
-- Set up ramp-up time functionality
 - Add in search, historical, real-time, and section views
 - Celebrate
