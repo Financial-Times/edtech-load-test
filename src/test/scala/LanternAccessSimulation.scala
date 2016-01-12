@@ -6,7 +6,7 @@ import utils.LoadTestDefaults._
 
 class LanternAccessSimulation extends Simulation {
 
-  val rampUp = Integer.getInteger("ramp-up-minutes", DefaultRampUpDurationInMinutes)
+  val rampUp = Integer.getInteger("ramp-up-seconds", DefaultRampUpDurationInSeconds)
   val numUsers = Integer.getInteger("users", DefaultNumUsers)
   val sessionID : String = ArticleValues.SessionID
 
@@ -24,7 +24,7 @@ class LanternAccessSimulation extends Simulation {
   setUp(
 
     scn.inject(
-      rampUsers(numUsers) over (rampUp minutes))
+      rampUsers(numUsers) over (rampUp seconds))
   ).protocols(initialPage)
 
 }
