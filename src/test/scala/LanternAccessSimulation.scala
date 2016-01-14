@@ -2,7 +2,6 @@ import io.gatling.core.Predef._
 import io.gatling.core.scenario.Simulation
 import io.gatling.core.structure.ChainBuilder
 import io.gatling.http.Predef._
-import utils.ArticleValues
 import utils.LoadTestDefaults._
 
 class LanternAccessSimulation extends Simulation {
@@ -11,7 +10,7 @@ class LanternAccessSimulation extends Simulation {
 
   val rampUp = Integer.getInteger("ramp-up-seconds", DefaultRampUpDurationInSeconds)
   val numUsers = Integer.getInteger("users", DefaultNumUsers)
-  val sessionID : String = ArticleValues.SessionID
+  val sessionID : String = System.getenv("ET_SESSION_ID")
   val initialPage = http.baseURL(baseUrl)
 
   def genericTest(testName: String, testUrl: String): ChainBuilder = {
