@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export $(cat .env)
+
 LANTERN_USERS=10
 RAMP_UP_SECONDS=20
 SOAK_DURATION_MINUTES=5
@@ -11,11 +13,9 @@ ICON_EMOJI=":gatling:"
 
 SLACK_CHANNEL_URL="https://hooks.slack.com$ET_HOME_CHANNEL"
 
-env $(cat .env)
-
 sleep 2
 
-curl -X POST -H "Content-Type:application/json" \
+echo curl -X POST -H "Content-Type:application/json" \
     --data '{ "text":"'"$TEXT"'", "username":"'"$USERNAME"'", "icon_emoji":"'"$ICON_EMOJI"'" }' $SLACK_CHANNEL_URL
 
 
