@@ -9,7 +9,9 @@ TEXT="In $SLEEP_TIME seconds: Running $LANTERN_USERS users through Lantern over 
 USERNAME="gatling-bot"
 ICON_EMOJI=":gatling:"
 
-SLACK_CHANNEL_URL="https://hooks.slack.com$HOME_CHANNEL"
+SLACK_CHANNEL_URL="https://hooks.slack.com$ET_HOME_CHANNEL"
+
+env $(cat .env)
 
 sleep 2
 
