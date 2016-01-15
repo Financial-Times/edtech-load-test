@@ -15,7 +15,7 @@ SLACK_CHANNEL_URL="https://hooks.slack.com$ET_HOME_CHANNEL"
 
 sleep 2
 
-echo curl -X POST -H "Content-Type:application/json" \
+curl -X POST -H "Content-Type:application/json" \
     --data '{ "text":"'"$TEXT"'", "username":"'"$USERNAME"'", "icon_emoji":"'"$ICON_EMOJI"'" }' $SLACK_CHANNEL_URL
 
 
