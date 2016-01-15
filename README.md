@@ -34,3 +34,4 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - Hear response from Gatling: what webpage am I on?
 - Add in search, historical, real-time, and section views
 - Create .env file for dealing with variables
+- Randomise pause times

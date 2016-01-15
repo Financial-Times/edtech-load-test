@@ -4,6 +4,8 @@ import io.gatling.core.structure.ChainBuilder
 import io.gatling.http.Predef._
 import utils.LoadTestDefaults._
 
+import scala.util.Random
+
 class LanternAccessSimulation extends Simulation {
 
   val baseUrl = "http://lantern.ft.com"
@@ -16,15 +18,20 @@ class LanternAccessSimulation extends Simulation {
   def genericTest(testName: String, testUrl: String): ChainBuilder = {
     val urlConcat = baseUrl.concat(testUrl)
 
+    val waitTime = new Random();
+
     val test = exec(addCookie(Cookie("connect.sid",sessionID)))
-      .exec(http("Home")
-        .get("/"))
-      .pause(3)
+      .pause(waitTime.nextInt(10))
       .exec(http(testName)
         .get(testUrl)
         .check(currentLocation.is(urlConcat)))
 
     return test
+  }
+
+  object Home {
+    val homeGet = "/" + "?PerfTest"
+    val home = genericTest("Home",homeGet)
   }
 
   object Historical {
@@ -47,7 +54,7 @@ class LanternAccessSimulation extends Simulation {
     val topics = genericTest("Topics",topicsGet)
   }
 
-  val scnLantern = scenario("Lantern").exec(Historical.historical, Realtime.realtime, Sections.sections, Topics.topics)
+  val scnLantern = scenario("Lantern").exec(Home.home, Historical.historical, Realtime.realtime, Sections.sections, Topics.topics)
 
   setUp(
     scnLantern.inject(rampUsers(numUsers) over (rampUp seconds))
