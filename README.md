@@ -22,10 +22,13 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - `ET_SESSION_ID` - login to http://lantern.ft.com/ get your session ID from cookies. This may need to be changed regularly
 
 ## Todo
+- Automated pull-top-article for realtime
+- Jenkins setup (awscli)
 - Celebrate
+
+## Stasis
 - Web socket for realtime articles
 - Post request to historical
-- Automated pull-top-article for realtime
 
 ## Done
 - Ramp-up time functionality
