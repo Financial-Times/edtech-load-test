@@ -22,9 +22,9 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - `ET_SESSION_ID` - login to http://lantern.ft.com/ get your session ID from cookies. This may need to be changed regularly
 
 ## Todo
+- Remove `ET_SESSION_ID` from .env file and readme : replace with manual parameter in Jenkins
 - Automated pull-top-article for realtime
 - Random article find (create list)
-- Jenkins setup (awscli)
 - Celebrate
 
 ## Stasis
@@ -39,3 +39,4 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - Add in search, historical, real-time, and section views
 - Create .env file for dealing with variables
 - Randomise pause times
+- Jenkins setup (awscli)
