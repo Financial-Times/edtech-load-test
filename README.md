@@ -1,6 +1,6 @@
 # Editorial Technology Load Tests
 
-[!image](http://gatling.io/images/gatling-logo.png)
+![image](http://gatling.io/images/gatling-logo.png)
 
 ## Why?
 We need load tests for our products and services. This aims to provide.
