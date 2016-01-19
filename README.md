@@ -23,6 +23,7 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 
 ## Todo
 - Automated pull-top-article for realtime
+- Random article find (create list)
 - Jenkins setup (awscli)
 - Celebrate
 
