@@ -19,10 +19,9 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 
 ### Env File Population
 - `ET_HOME_CHANNEL` - the Slack channel to alert. This should not change often
-- `ET_SESSION_ID` - login to http://lantern.ft.com/ get your session ID from cookies. This may need to be changed regularly
+- `ET_SESSION_ID` - login to http://lantern.ft.com/ get your session ID from cookies. This is created currently by Jenkins
 
 ## Todo
-- Remove `ET_SESSION_ID` from .env file and readme : replace with manual parameter in Jenkins
 - Automated pull-top-article for realtime
 - Random article find (create list)
 - Celebrate
@@ -40,3 +39,5 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - Create .env file for dealing with variables
 - Randomise pause times
 - Jenkins setup (awscli)
+- Remove `ET_SESSION_ID` from .env file and readme : replace with manual parameter in Jenkins
+- Add reaction to slack post
