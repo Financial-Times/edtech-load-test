@@ -19,7 +19,7 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 
 ### Env File Population
 - `ET_HOME_CHANNEL` - the Slack channel to alert. This should not change often
-- `ET_SESSION_ID` - login to http://lantern.ft.com/ get your session ID from cookies. This is created currently by Jenkins
+- `ET_SESSION_ID` - login to http://lantern.ft.com/ get your session ID from cookies. This is created currently by Jenkins, and does not need to be populated
 
 ## Todo
 - Automated pull-top-article for realtime
