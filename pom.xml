@@ -23,6 +23,7 @@
         <gatling-plugin.version>2.1.7</gatling-plugin.version>
         <scala-maven-plugin.version>3.2.2</scala-maven-plugin.version>
         <scala.version>2.11.7</scala.version>
+        <json4s.version>3.3.0</json4s.version>
     </properties>
 
     <dependencies>
@@ -52,6 +53,13 @@
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- JSON -->
+        <dependency>
+            <groupId>org.json4s</groupId>
+            <artifactId>json4s-native_2.11</artifactId>
+            <version>${json4s.version}</version>
         </dependency>
     </dependencies>
 

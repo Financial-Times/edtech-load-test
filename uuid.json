@@ -1,0 +1,51 @@
+{
+  "took": 222,
+  "timed_out": false,
+  "_shards": {
+    "total": 50,
+    "successful": 50,
+    "failed": 0
+  },
+  "hits": {
+    "total": 1011822,
+    "max_score": 0.0,
+    "hits": []
+  },
+  "aggregations": {
+    "topic_views": {
+      "doc_count_error_upper_bound": 1338,
+      "sum_other_doc_count": 723093,
+      "buckets": [{
+        "key": "78de861e-bf17-11e5-846f-79b0e3d20eaf",
+        "doc_count": 72153
+      }, {
+        "key": "ae4dee44-bf34-11e5-9fdb-87b8d15baec2",
+        "doc_count": 38237
+      }, {
+        "key": "dfc5f42e-bf9a-11e5-9fdb-87b8d15baec2",
+        "doc_count": 35634
+      }, {
+        "key": "51ca24e6-bf5a-11e5-9fdb-87b8d15baec2",
+        "doc_count": 31868
+      }, {
+        "key": "5e438d52-bf69-11e5-9fdb-87b8d15baec2",
+        "doc_count": 22162
+      }, {
+        "key": "a987c7ea-be9e-11e5-846f-79b0e3d20eaf",
+        "doc_count": 21382
+      }, {
+        "key": "195ffcea-bf99-11e5-846f-79b0e3d20eaf",
+        "doc_count": 20183
+      }, {
+        "key": "34eb06c4-bf87-11e5-9fdb-87b8d15baec2",
+        "doc_count": 17261
+      }, {
+        "key": "5eb91614-bee5-11e5-846f-79b0e3d20eaf",
+        "doc_count": 15096
+      }, {
+        "key": "ae9aa766-be94-11e5-846f-79b0e3d20eaf",
+        "doc_count": 14753
+      }]
+    }
+  }
+}
