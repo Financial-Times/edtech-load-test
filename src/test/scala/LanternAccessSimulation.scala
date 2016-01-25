@@ -14,7 +14,7 @@ class LanternAccessSimulation extends Simulation {
   val sessionID : String = System.getenv("ET_SESSION_ID")
   val initialPage = http.baseURL(baseUrl)
 
-  val perfTestID = "?LanternPerfTest"
+  val perfTestID = "?PerfTestLantern"
 
   val feeder = genArray().circular
 
