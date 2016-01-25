@@ -14,6 +14,8 @@ class LanternAccessSimulation extends Simulation {
   val sessionID : String = System.getenv("ET_SESSION_ID")
   val initialPage = http.baseURL(baseUrl)
 
+  val perfTestID = "?LanternPerfTest"
+
   val feeder = genArray().circular
 
   def genericTest(testName: String, testUrl: String): ChainBuilder = {
@@ -38,7 +40,7 @@ class LanternAccessSimulation extends Simulation {
   }
 
   def realtimeTest(testUuid: String): ChainBuilder = {
-    val testUrl = "/realtime/articles/${uuid}?PerfTest"
+    val testUrl = "/realtime/articles/${uuid}" + perfTestID
     val urlConcat = baseUrl.concat(testUrl)
 
     val test = exec(addCookie(Cookie("connect.sid",sessionID)))
@@ -50,12 +52,12 @@ class LanternAccessSimulation extends Simulation {
   }
 
   object Home {
-    val homeGet = "/" + "?PerfTest"
+    val homeGet = "/" + perfTestID
     val getPage = genericTest("Home",homeGet)
   }
 
   object Historical {
-    val historicalGet = "/articles/9b66e747-6da4-3d0f-a189-c38d2997df10/global/FT" + "?PerfTest"
+    val historicalGet = "/articles/9b66e747-6da4-3d0f-a189-c38d2997df10/global/FT" + perfTestID
     val getPage = genericTest("Historical",historicalGet)
   }
 
@@ -64,12 +66,12 @@ class LanternAccessSimulation extends Simulation {
   }
 
   object Sections {
-    val sectionsGet = "/sections/Companies" + "?PerfTest"
+    val sectionsGet = "/sections/Companies" + perfTestID
     val getPage = genericTest("Sections",sectionsGet)
   }
 
   object Topics{
-    val topicsGet = "/topics/Driverless%20Cars" + "?PerfTest"
+    val topicsGet = "/topics/Driverless%20Cars" + perfTestID
     val getPage = genericTest("Topics",topicsGet)
   }
 
