@@ -22,18 +22,16 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - `ET_SESSION_ID` - login to http://lantern.ft.com/ get your session ID from cookies. This is created currently by Jenkins, and does not need to be populated
 
 ## Todo
-- Automated pull-top-article for realtime
-- Random article find (create list)
+- Web socket for realtime articles
 - Celebrate
 
 ## Stasis
-- Web socket for realtime articles
 - Post request to historical
 
 ## Done
 - Ramp-up time functionality
 - Send Slack notification on lantern assault
-- Change minutes to seconds for ramp up
+- Change minutes to seconds fro ramp up
 - Hear response from Gatling: what webpage am I on?
 - Add in search, historical, real-time, and section views
 - Create .env file for dealing with variables
@@ -41,3 +39,5 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - Jenkins setup (awscli)
 - Remove `ET_SESSION_ID` from .env file and readme : replace with manual parameter in Jenkins
 - Add reaction to slack post
+- Automated pull-top-article for realtime
+- Random article find (create list)

@@ -2,9 +2,8 @@ import io.gatling.core.Predef._
 import io.gatling.core.scenario.Simulation
 import io.gatling.core.structure.ChainBuilder
 import io.gatling.http.Predef._
+import utils.ConfigLoader
 import utils.LoadTestDefaults._
-
-import scala.util.Random
 
 class LanternAccessSimulation extends Simulation {
 
@@ -15,14 +14,35 @@ class LanternAccessSimulation extends Simulation {
   val sessionID : String = System.getenv("ET_SESSION_ID")
   val initialPage = http.baseURL(baseUrl)
 
+  val feeder = genArray().circular
+
   def genericTest(testName: String, testUrl: String): ChainBuilder = {
     val urlConcat = baseUrl.concat(testUrl)
 
-    val waitTime = new Random();
+    val test = exec(addCookie(Cookie("connect.sid",sessionID)))
+      .exec(http(testName)
+        .get(testUrl)
+        .check(currentLocation.is(urlConcat)))
+
+    return test
+  }
+
+  def genArray(): Array[Map[String,String]] ={
+    var array = Array[Map[String,String]]()
+
+    ConfigLoader.uuidList().foreach{s =>
+      array = array :+ Map("uuid" -> s)
+    }
+
+    return array
+  }
+
+  def realtimeTest(testUuid: String): ChainBuilder = {
+    val testUrl = "/realtime/articles/${uuid}?PerfTest"
+    val urlConcat = baseUrl.concat(testUrl)
 
     val test = exec(addCookie(Cookie("connect.sid",sessionID)))
-      .pause(waitTime.nextInt(10))
-      .exec(http(testName)
+      .exec(http("Realtime")
         .get(testUrl)
         .check(currentLocation.is(urlConcat)))
 
@@ -31,30 +51,45 @@ class LanternAccessSimulation extends Simulation {
 
   object Home {
     val homeGet = "/" + "?PerfTest"
-    val home = genericTest("Home",homeGet)
+    val getPage = genericTest("Home",homeGet)
   }
 
   object Historical {
     val historicalGet = "/articles/9b66e747-6da4-3d0f-a189-c38d2997df10/global/FT" + "?PerfTest"
-    val historical = genericTest("Historical",historicalGet)
+    val getPage = genericTest("Historical",historicalGet)
   }
 
   object Realtime {
-    val realtimeGet = "/realtime/articles/704162f8-b5f1-11e5-b147-e5e5bba42e51" + "?PerfTest"
-    val realtime = genericTest("Realtime",realtimeGet)
+    val getPage = realtimeTest("Realtime")
   }
 
   object Sections {
     val sectionsGet = "/sections/Companies" + "?PerfTest"
-    val sections = genericTest("Sections",sectionsGet)
+    val getPage = genericTest("Sections",sectionsGet)
   }
 
   object Topics{
     val topicsGet = "/topics/Driverless%20Cars" + "?PerfTest"
-    val topics = genericTest("Topics",topicsGet)
+    val getPage = genericTest("Topics",topicsGet)
   }
 
-  val scnLantern = scenario("Lantern").exec(Home.home, Historical.historical, Realtime.realtime, Sections.sections, Topics.topics)
+  val scnLantern = scenario("Lantern")
+      .feed(feeder)
+    .roundRobinSwitch(
+      Realtime.getPage,
+      Historical.getPage,
+      Realtime.getPage,
+      Historical.getPage,
+      Realtime.getPage,
+      Home.getPage,
+      Realtime.getPage,
+      roundRobinSwitch(
+        Topics.getPage,
+        Sections.getPage
+      ),
+      Realtime.getPage,
+      Realtime.getPage
+    )
 
   setUp(
     scnLantern.inject(rampUsers(numUsers) over (rampUp seconds))
