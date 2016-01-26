@@ -22,7 +22,6 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - `ET_SESSION_ID` - login to http://lantern.ft.com/ get your session ID from cookies. This is created currently by Jenkins, and does not need to be populated
 
 ## Todo
-- Web socket for realtime articles
 - Celebrate
 
 ## Stasis
@@ -42,3 +41,4 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - Automated pull-top-article for realtime
 - Random article find (create list)
 - perfTestID
+- Web socket for realtime articles
