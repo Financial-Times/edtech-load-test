@@ -43,3 +43,6 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - perfTestID
 - Web socket for realtime articles
 - Turn web socket request into random string to avoid status 1006
+
+## Notes
+- `uuid.json` should generate itself due to a jenkins shell script
