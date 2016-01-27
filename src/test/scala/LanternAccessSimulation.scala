@@ -44,6 +44,7 @@ class LanternAccessSimulation extends Simulation {
   def realtimeTest(testUuid: String): ChainBuilder = {
     val testUrl = "/${uuid}" + perfTestID
     val urlConcat = baseUrl.concat(testUrl)
+    val responseTime = 60
 
     val test = exec(addCookie(Cookie("connect.sid",sessionID)))
       .exec(http("Realtime Page")
@@ -69,11 +70,24 @@ class LanternAccessSimulation extends Simulation {
       .exec(ws("Connect WS").open("/?EIO=3&transport=websocket&sid=${sid}"))
       .exec(ws("Send Probe").sendText("2probe").check(wsAwait.within(3).until(1).regex("3probe")))
       .exec(ws("Confirm Probe").sendText("5"))
-      .exec(ws("42 Responses").check(wsAwait.within(30).until(5).regex("(42.*)")))
+
+      .exec(ws("42 Responses").check(wsAwait.within(responseTime).until(5).regex("(42.*)")))
       .exec(ws("Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
-      .exec(ws("42 Responses").check(wsAwait.within(30).until(5).regex("(42.*)")))
+      .exec(ws("42 Responses").check(wsAwait.within(responseTime).until(5).regex("(42.*)")))
       .exec(ws("Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
-      .exec(ws("Close WS").close)
+      .exec(ws("42 Responses").check(wsAwait.within(responseTime).until(5).regex("(42.*)")))
+      .exec(ws("Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
+//
+//    {
+//      var a =0
+//
+//      for (a <- 1 until 10) {
+//        exec(ws("42 Responses").check(wsAwait.within(responseTime).until(5).regex("(42.*)")))
+//          .exec(ws("Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
+//      }
+//    }
+
+       .exec(ws("Close WS").close)
 
     return test
   }
