@@ -106,18 +106,18 @@ class LanternAccessSimulation extends Simulation {
     .feed(feeder)
     .roundRobinSwitch(
       Realtime.getPage,
-      Historical.getPage,
+      Realtime.getPage,
+      Realtime.getPage,
+      Realtime.getPage,
+      Realtime.getPage,
       Realtime.getPage,
       Historical.getPage,
-      Realtime.getPage,
+      Historical.getPage,
       Home.getPage,
-      Realtime.getPage,
       roundRobinSwitch(
         Topics.getPage,
         Sections.getPage
-      ),
-      Realtime.getPage,
-      Realtime.getPage
+      )
     )
 
   setUp(
