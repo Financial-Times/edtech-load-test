@@ -2,8 +2,10 @@ import io.gatling.core.Predef._
 import io.gatling.core.scenario.Simulation
 import io.gatling.core.structure.ChainBuilder
 import io.gatling.http.Predef._
-import utils.ConfigLoader
+import utils.{RandomGenerator, ConfigLoader}
 import utils.LoadTestDefaults._
+
+import scala.util.Random
 
 class LanternAccessSimulation extends Simulation {
 
@@ -15,10 +17,8 @@ class LanternAccessSimulation extends Simulation {
   val initialPage = http
     .baseURL(baseUrl)
     .wsBaseURL("wss://lantern.ft.com/socket.io")
-  //    .wsBaseURL("ws://echo.websocket.org")
 
   val perfTestID = "?PerfTestLantern"
-
   val feeder = genArray().circular
 
   def genericTest(testName: String, testUrl: String): ChainBuilder = {
@@ -53,19 +53,19 @@ class LanternAccessSimulation extends Simulation {
         .check(currentLocation.is(urlConcat))
         .check(status.is(200)))
       .exec(http("getSID")
-        .get("/socket.io/?EIO=3&transport=polling&t=L9zbYPl")
+        .get("/socket.io/?EIO=3&transport=polling&t=" + "LA2" + RandomGenerator.string(4))
         .check(regex("\"sid\":\"(.*)\",\".*").saveAs("sid"))
         .check(bodyString.find.saveAs("bodyString"))
         .check(status.is(200)))
       .exec(http("Get?")
-        .get("/socket.io/?EIO=3&transport=polling&t=L9zbYPm&sid=${sid}")
+        .get("/socket.io/?EIO=3&transport=polling&t=" + "LA2" + RandomGenerator.string(4) + "&sid=${sid}")
         .check(status.is(200)))
       .exec(http("Subscribe to Article")
-        .post("/socket.io/?EIO=3&transport=polling&t=L9zbYPn&sid=${sid}")
+        .post("/socket.io/?EIO=3&transport=polling&t=" + "LA2" + RandomGenerator.string(4) + "&sid=${sid}")
         .body(StringBody("63:42[\"subscribeToArticle\",\"${uuid}\"]"))
         .check(status.is(200)))
       .exec(http("Get?")
-        .get("/socket.io/?EIO=3&transport=polling&t=L9zbYPm&sid=${sid}")
+        .get("/socket.io/?EIO=3&transport=polling&t=" + "LA2" + RandomGenerator.string(4) + "&sid=${sid}")
         .check(status.is(200)))
 
       .exec(ws("Connect WS").open("/?EIO=3&transport=websocket&sid=${sid}"))
@@ -75,9 +75,19 @@ class LanternAccessSimulation extends Simulation {
       .exec(ws("Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
       .exec(ws("42 Responses").check(wsAwait.within(30).until(5).regex("(42.*)")))
       .exec(ws("Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
-     .exec(ws("Close WS").close)
-
-    // TODO: Fix responses: probably something to do with ... no clue.
+      .exec(ws("42 Responses").check(wsAwait.within(30).until(5).regex("(42.*)")))
+      .exec(ws("Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
+      .exec(ws("42 Responses").check(wsAwait.within(30).until(5).regex("(42.*)")))
+      .exec(ws("Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
+      .exec(ws("42 Responses").check(wsAwait.within(30).until(5).regex("(42.*)")))
+      .exec(ws("Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
+      .exec(ws("42 Responses").check(wsAwait.within(30).until(5).regex("(42.*)")))
+      .exec(ws("Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
+      .exec(ws("42 Responses").check(wsAwait.within(30).until(5).regex("(42.*)")))
+      .exec(ws("Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
+      .exec(ws("42 Responses").check(wsAwait.within(30).until(5).regex("(42.*)")))
+      .exec(ws("Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
+      .exec(ws("Close WS").close)
 
     return test
   }

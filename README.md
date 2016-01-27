@@ -42,3 +42,4 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - Random article find (create list)
 - perfTestID
 - Web socket for realtime articles
+- Turn web socket request into random string to avoid status 1006
