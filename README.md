@@ -23,6 +23,7 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 
 ## Todo
 - Celebrate
+- Dynamic repeats for the `42 Response` test
 
 ## Stasis
 - Post request to historical
@@ -44,6 +45,7 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - Web socket for realtime articles
 - Turn web socket request into random string to avoid status 1006
 - Config and logback to fix Websocket 1006
+- Repeats for the `42 Response` test
 
 ## Notes
 - `uuid.json` should generate itself due to a jenkins shell script

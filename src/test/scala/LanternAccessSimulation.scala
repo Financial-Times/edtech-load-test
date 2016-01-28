@@ -23,7 +23,7 @@ class LanternAccessSimulation extends Simulation {
     val urlConcat = baseUrl.concat(testUrl)
 
     val test = exec(addCookie(Cookie("connect.sid",sessionID)))
-      .exec(http(testName + " Page")
+      .exec(http(testName)
         .get(testUrl)
         .check(currentLocation.is(urlConcat))
         .check(status.is(200)))
@@ -41,53 +41,41 @@ class LanternAccessSimulation extends Simulation {
     return array
   }
 
-  def realtimeTest(testUuid: String): ChainBuilder = {
+  def realtimeTest(testName: String): ChainBuilder = {
     val testUrl = "/${uuid}" + perfTestID
     val urlConcat = baseUrl.concat(testUrl)
-    val responseTime = 60
 
     val test = exec(addCookie(Cookie("connect.sid",sessionID)))
-      .exec(http("Realtime Page")
+      .exec(http(testName)
         .get(testUrl)
         .check(currentLocation.is(urlConcat))
         .check(status.is(200)))
-      .exec(http("getSID")
+      .exec(http("HTTP: getSID")
         .get("/socket.io/?EIO=3&transport=polling&t=" + "LA2" + RandomGenerator.string(4))
         .check(regex("\"sid\":\"(.*)\",\".*").saveAs("sid"))
         .check(bodyString.find.saveAs("bodyString"))
         .check(status.is(200)))
-      .exec(http("Get?")
+      .exec(http("HTTP: Confirm SID")
         .get("/socket.io/?EIO=3&transport=polling&t=" + "LA2" + RandomGenerator.string(4) + "&sid=${sid}")
         .check(status.is(200)))
-      .exec(http("Subscribe to Article")
+      .exec(http("HTTP: Subscribe to Article")
         .post("/socket.io/?EIO=3&transport=polling&t=" + "LA2" + RandomGenerator.string(4) + "&sid=${sid}")
         .body(StringBody("63:42[\"subscribeToArticle\",\"${uuid}\"]"))
         .check(status.is(200)))
-      .exec(http("Get?")
+      .exec(http("HTTP: Confirm Subscription")
         .get("/socket.io/?EIO=3&transport=polling&t=" + "LA2" + RandomGenerator.string(4) + "&sid=${sid}")
         .check(status.is(200)))
 
-      .exec(ws("Connect WS").open("/?EIO=3&transport=websocket&sid=${sid}"))
-      .exec(ws("Send Probe").sendText("2probe").check(wsAwait.within(3).until(1).regex("3probe")))
-      .exec(ws("Confirm Probe").sendText("5"))
-
-      .exec(ws("42 Responses").check(wsAwait.within(responseTime).until(5).regex("(42.*)")))
-      .exec(ws("Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
-      .exec(ws("42 Responses").check(wsAwait.within(responseTime).until(5).regex("(42.*)")))
-      .exec(ws("Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
-      .exec(ws("42 Responses").check(wsAwait.within(responseTime).until(5).regex("(42.*)")))
-      .exec(ws("Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
-//
-//    {
-//      var a =0
-//
-//      for (a <- 1 until 10) {
-//        exec(ws("42 Responses").check(wsAwait.within(responseTime).until(5).regex("(42.*)")))
-//          .exec(ws("Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
-//      }
-//    }
-
-       .exec(ws("Close WS").close)
+      .exec(ws("Web Socket: Connect").open("/?EIO=3&transport=websocket&sid=${sid}"))
+      .exec(ws("Web Socket: Send 2probe").sendText("2probe").check(wsAwait.within(3).until(1).regex("3probe")))
+      .exec(ws("Web Socket: Send 5").sendText("5"))
+      .repeat(2){
+        exec(repeat(5) {
+          exec(ws("Web Socket: 42 Response").check(wsAwait.within(20).until(1).regex("(42.*)")))
+        })
+          .exec(ws("Web Socket: Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
+      }
+      .exec(ws("Web Socket: Close").close)
 
     return test
   }
@@ -99,21 +87,21 @@ class LanternAccessSimulation extends Simulation {
 
   object Historical {
     val historicalGet = "/articles/9b66e747-6da4-3d0f-a189-c38d2997df10/global/FT" + perfTestID
-    val getPage = genericTest("Historical",historicalGet)
+    val getPage = genericTest("Page: Historical",historicalGet)
   }
 
   object Realtime {
-    val getPage = realtimeTest("Realtime")
+    val getPage = realtimeTest("Page: Realtime")
   }
 
   object Sections {
     val sectionsGet = "/sections/Companies" + perfTestID
-    val getPage = genericTest("Sections",sectionsGet)
+    val getPage = genericTest("Page: Sections",sectionsGet)
   }
 
   object Topics{
     val topicsGet = "/topics/Driverless%20Cars" + perfTestID
-    val getPage = genericTest("Topics",topicsGet)
+    val getPage = genericTest("Page: Topics",topicsGet)
   }
 
   val scnLantern = scenario("Lantern")
