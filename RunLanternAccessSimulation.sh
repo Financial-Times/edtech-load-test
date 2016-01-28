@@ -7,7 +7,7 @@ RAMP_UP_SECONDS=20
 SOAK_DURATION_MINUTES=5
 
 SLEEP_TIME=10
-TEXT="In $SLEEP_TIME seconds: Running $LANTERN_USERS users through Lantern over $RAMP_UP_SECONDS secs"
+TEXT="In $SLEEP_TIME seconds: Running $LANTERN_USERS users through Lantern over $RAMP_UP_SECONDS secs. Expect a report in approximately $ET_TEST_DURATION seconds."
 USERNAME="gatling-bot"
 ICON_EMOJI=":gatling:"
 
