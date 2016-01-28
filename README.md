@@ -26,6 +26,7 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - Celebrate
 - Figure out why all users have to be in multiples of 20
 - Put *Uuid.json into their own folder for neatness
+- Jenkins: if build fail, run Slack message `build failed!`
 
 ## Done
 - Ramp-up time functionality
