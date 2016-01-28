@@ -61,6 +61,13 @@
             <artifactId>json4s-native_2.11</artifactId>
             <version>${json4s.version}</version>
         </dependency>
+
+        <!-- Commons Collections -->
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+        </dependency>
     </dependencies>
 
     <build>

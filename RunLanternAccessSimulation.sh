@@ -2,7 +2,7 @@
 
 export $(cat .env)
 
-LANTERN_USERS=1
+LANTERN_USERS=20
 RAMP_UP_SECONDS=20
 SOAK_DURATION_MINUTES=5
 
@@ -15,8 +15,8 @@ SLACK_CHANNEL_URL="https://hooks.slack.com$ET_HOME_CHANNEL"
 
 sleep 2
 
-curl -X POST -H "Content-Type:application/json" \
-    --data '{ "text":"'"$TEXT"'", "username":"'"$USERNAME"'", "icon_emoji":"'"$ICON_EMOJI"'" }' $SLACK_CHANNEL_URL
+#curl -X POST -H "Content-Type:application/json" \
+#    --data '{ "text":"'"$TEXT"'", "username":"'"$USERNAME"'", "icon_emoji":"'"$ICON_EMOJI"'" }' $SLACK_CHANNEL_URL
 
 sleep $SLEEP_TIME
 mvn gatling:execute -Dgatling.simulationClass=LanternAccessSimulation -Dusers=$LANTERN_USERS -Dramp-up-seconds=$RAMP_UP_SECONDS -Dsoak-duration-minutes=$SOAK_DURATION_MINUTES

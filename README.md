@@ -24,8 +24,6 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 
 ## Todo
 - Celebrate
-- Generate Historical uuids randomly
-- Forever loop on Historial
 
 ## Done
 - Ramp-up time functionality
@@ -44,8 +42,10 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - Web socket for realtime articles
 - Turn web socket request into random string to avoid status 1006
 - Config and logback to fix Websocket 1006
-- Forever loop for the `42 Response` test
+- Forever loops on everything
 - Test duration input
+- Generate Historical uuids randomly
+- Complete refactor of code!
 
 ## Notes
-- `uuid.json` should generate itself due to a jenkins shell script
+- A bunch of `uuid.json` should generate itself due to a jenkins shell script. If not, you need to create `historicalUuid.json` and `realtimeUuid.json`
