@@ -19,14 +19,13 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 
 ### Env File Population
 - `ET_HOME_CHANNEL` - the Slack channel to alert. This should not change often
+- `ET_TEST_DURATION` - time for the tests to run, in seconds. Usually input into the Jenkins build
 - `ET_SESSION_ID` - login to http://lantern.ft.com/ get your session ID from cookies. This is created currently by Jenkins, and does not need to be populated
 
 ## Todo
 - Celebrate
-- Dynamic repeats for the `42 Response` test
-
-## Stasis
-- Post request to historical
+- Generate Historical uuids randomly
+- Forever loop on Historial
 
 ## Done
 - Ramp-up time functionality
@@ -45,7 +44,8 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - Web socket for realtime articles
 - Turn web socket request into random string to avoid status 1006
 - Config and logback to fix Websocket 1006
-- Repeats for the `42 Response` test
+- Forever loop for the `42 Response` test
+- Test duration input
 
 ## Notes
 - `uuid.json` should generate itself due to a jenkins shell script

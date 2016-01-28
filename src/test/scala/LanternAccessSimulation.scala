@@ -4,11 +4,13 @@ import io.gatling.core.structure.ChainBuilder
 import io.gatling.http.Predef._
 import utils.{RandomGenerator, ConfigLoader}
 import utils.LoadTestDefaults._
+import scala.concurrent.duration._
 
 class LanternAccessSimulation extends Simulation {
 
   val baseUrl = "http://lantern.ft.com"
 
+  val testDuration = System.getenv("ET_TEST_DURATION").toInt
   val rampUp = Integer.getInteger("ramp-up-seconds", DefaultRampUpDurationInSeconds)
   val numUsers = Integer.getInteger("users", DefaultNumUsers)
   val sessionID : String = System.getenv("ET_SESSION_ID")
@@ -69,13 +71,12 @@ class LanternAccessSimulation extends Simulation {
       .exec(ws("Web Socket: Connect").open("/?EIO=3&transport=websocket&sid=${sid}"))
       .exec(ws("Web Socket: Send 2probe").sendText("2probe").check(wsAwait.within(3).until(1).regex("3probe")))
       .exec(ws("Web Socket: Send 5").sendText("5"))
-      .repeat(2){
+      .forever{
         exec(repeat(5) {
           exec(ws("Web Socket: 42 Response").check(wsAwait.within(20).until(1).regex("(42.*)")))
         })
           .exec(ws("Web Socket: Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
       }
-      .exec(ws("Web Socket: Close").close)
 
     return test
   }
@@ -123,9 +124,9 @@ class LanternAccessSimulation extends Simulation {
     )
 
   setUp(
-    scnLantern.inject(rampUsers(numUsers) over (rampUp seconds))
-  ).protocols(initialPage)
-
-
+    scnLantern.inject(
+      rampUsers(numUsers) over (rampUp seconds)
+    ).protocols(initialPage)
+  ).maxDuration(testDuration seconds)
 
 }
