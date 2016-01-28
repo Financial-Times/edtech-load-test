@@ -19,4 +19,4 @@ sleep 2
 #    --data '{ "text":"'"$TEXT"'", "username":"'"$USERNAME"'", "icon_emoji":"'"$ICON_EMOJI"'" }' $SLACK_CHANNEL_URL
 
 sleep $SLEEP_TIME
-mvn gatling:execute -Dgatling.simulationClass=LanternAccessSimulation -Dusers=$LANTERN_USERS -Dramp-up-seconds=$RAMP_UP_SECONDS -Dsoak-duration-minutes=$SOAK_DURATION_MINUTES
+mvn gatling:execute -Dgatling.simulationClass=LanternSimulation -Dusers=$LANTERN_USERS -Dramp-up-seconds=$RAMP_UP_SECONDS -Dsoak-duration-minutes=$SOAK_DURATION_MINUTES
