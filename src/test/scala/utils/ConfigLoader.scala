@@ -6,7 +6,7 @@ import org.json4s.native.JsonMethods._
 
 object ConfigLoader {
 
-  def uuidList(): List[String] = {
+  def realtimeUuidList(): List[String] = {
     val source = scala.io.Source.fromFile("uuid.json")
     val lines = try source.mkString finally source.close()
     val json = parse(lines)

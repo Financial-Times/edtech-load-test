@@ -29,14 +29,13 @@ class LanternAccessSimulation extends Simulation {
         .get(testUrl)
         .check(currentLocation.is(urlConcat))
         .check(status.is(200)))
-
     return test
   }
 
   def genArray(): Array[Map[String,String]] ={
     var array = Array[Map[String,String]]()
 
-    ConfigLoader.uuidList().foreach{s =>
+    ConfigLoader.realtimeUuidList().foreach{s =>
       array = array :+ Map("uuid" -> s)
     }
 
@@ -71,9 +70,9 @@ class LanternAccessSimulation extends Simulation {
       .exec(ws("Web Socket: Connect").open("/?EIO=3&transport=websocket&sid=${sid}"))
       .exec(ws("Web Socket: Send 2probe").sendText("2probe").check(wsAwait.within(3).until(1).regex("3probe")))
       .exec(ws("Web Socket: Send 5").sendText("5"))
-      .forever{
+      .forever(){
         exec(repeat(5) {
-          exec(ws("Web Socket: 42 Response").check(wsAwait.within(20).until(1).regex("(42.*)")))
+          exec(ws("Web Socket: 42 Response").check(wsAwait.within(30).until(1).regex("(42.*)")))
         })
           .exec(ws("Web Socket: Send 2, Receive 3").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
       }
@@ -83,7 +82,7 @@ class LanternAccessSimulation extends Simulation {
 
   object Home {
     val homeGet = "/" + perfTestID
-    val getPage = genericTest("Home",homeGet)
+    val getPage = genericTest("Page: Home",homeGet)
   }
 
   object Historical {
