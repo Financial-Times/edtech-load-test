@@ -18,7 +18,7 @@
     <logger name="disruption" level="INFO"/>
     <logger name="organisation" level="INFO"/>
     <logger name="people" level="INFO"/>
-    <root level="WARN">
+    <root level="OFF">
         <appender-ref ref="CONSOLE"/>
     </root>
 
