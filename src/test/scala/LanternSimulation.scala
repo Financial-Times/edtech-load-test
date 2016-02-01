@@ -1,6 +1,6 @@
 import io.gatling.core.scenario.Simulation
 
-import TestChains._
+import testChains._
 import utils.ConfigLoader._
 
 import io.gatling.core.Predef._

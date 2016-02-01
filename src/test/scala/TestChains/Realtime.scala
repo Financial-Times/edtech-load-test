@@ -1,4 +1,4 @@
-package TestChains
+package testChains
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
@@ -18,6 +18,9 @@ object Realtime {
         .get(url)
         .check(currentLocation.is(urlConcat))
         .check(status.is(200)))
+      .exec(http("HTTP: Get Timespan")
+        .get("https://lantern.ft.com/api/v0/realtime/articles/${uuid}?timespan=1h")
+        .check(status.is(200)))
       .exec(http("HTTP: Get SID")
         .get("/socket.io/?EIO=3&transport=polling&t=" + "LA2" + RandomGenerator.string(4))
         .check(regex("\"sid\":\"(.*)\",\".*").saveAs("sid"))
@@ -27,10 +30,14 @@ object Realtime {
         .check(status.is(200)))
       .exec(http("HTTP: POST Subscribe to article")
         .post("/socket.io/?EIO=3&transport=polling&t=" + "LA2" + RandomGenerator.string(4) + "&sid=${sid}")
-        .body(StringBody("63:42[\"subscribeToArticle\",\"${uuid}\"]"))
+        .body(StringBody("88:42[\"subscribeToArticle\",{\"uuid\":\"${uuid}\",\"timespan\":\"1h\"}]"))
         .check(status.is(200)))
       .exec(http("HTTP: Confirm subscription")
         .get("/socket.io/?EIO=3&transport=polling&t=" + "LA2" + RandomGenerator.string(4) + "&sid=${sid}")
+        .check(status.is(200)))
+      .exec(http("HTTP: POST Subscribe to article")
+        .post("/socket.io/?EIO=3&transport=polling&t=" + "LA2" + RandomGenerator.string(4) + "&sid=${sid}")
+        .body(StringBody("33:42[\"unsubscribeFromArticle\",null]88:42[\"subscribeToArticle\",{\"uuid\":\"${uuid}\",\"timespan\":\"1h\"}]"))
         .check(status.is(200)))
 
       .exec(ws("Web Socket: Connect").open("/?EIO=3&transport=websocket&sid=${sid}"))
