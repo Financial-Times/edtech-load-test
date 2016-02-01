@@ -25,7 +25,6 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 ## Todo
 - Celebrate
 - Figure out why all users have to be in multiples of 20
-- Put *Uuid.json into their own folder for neatness
 - Jenkins: if build fail, run Slack message `build failed!`
 
 ## Done
@@ -49,6 +48,7 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - Test duration input
 - Generate Historical uuids randomly
 - Complete refactor of code!
+- Put *Uuid.json into their own folder for neatness
 
 ## Notes
-- A bunch of `uuid.json` should generate itself due to a jenkins shell script. If not, you need to create `historicalUuid.json` and `realtimeUuid.json`
+- A group of `*Uuid.json` files should generate themselves due to a jenkins shell script. If not, you need to create `historicalUuid.json` and `realtimeUuid.json`

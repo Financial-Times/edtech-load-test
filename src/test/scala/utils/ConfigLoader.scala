@@ -23,19 +23,19 @@ object ConfigLoader {
 
 
   def realtimeFeeder() : Array[Map[String,String]] = {
-    generateUuidFeeder(readUuidListFromFile("realtimeUuid.json"))
+    generateUuidFeeder(readUuidListFromFile("./src/test/resources/uuid/realtimeUuid.json"))
   }
 
   def historicalFeeder() : Array[Map[String,String]] = {
-    generateUuidFeeder(readUuidListFromFile("historicalUuid.json"))
+    generateUuidFeeder(readUuidListFromFile("./src/test/resources/uuid/historicalUuid.json"))
   }
 
   def topicsFeeder() : Array[Map[String,String]] = {
-    generateUuidFeeder(readUuidListFromFile("topicsUuid.json"))
+    generateUuidFeeder(readUuidListFromFile("./src/test/resources/uuid/topicsUuid.json"))
   }
 
   def sectionsFeeder() : Array[Map[String,String]] = {
-    generateUuidFeeder(readUuidListFromFile("sectionsUuid.json"))
+    generateUuidFeeder(readUuidListFromFile("./src/test/resources/uuid/sectionsUuid.json"))
   }
 
   private def generateUuidFeeder(uuidList:List[String]): Array[Map[String,String]] ={
