@@ -19,14 +19,16 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 
 ### Env File Population
 - `ET_HOME_CHANNEL` - the Slack channel to alert. This should not change often
-- `ET_TEST_DURATION` - time for the tests to run, in seconds. Usually input into the Jenkins build
-- `ET_SESSION_ID` - login to http://lantern.ft.com/ get your session ID from cookies. This is created currently by Jenkins, and does not need to be populated
+- `ET_LANTERN_USERS` - number of users to connect to Lantern. Input into Jenkins build without `.env` 
+- `ET_RAMP_UP_SECONDS` - amount of time users will take to login. Input into Jenkins build without `.env`
+- `ET_TEST_DURATION` - time for the tests to run, in seconds. Input into Jenkins build without `.env` 
+- `ET_SESSION_ID` - login to http://lantern.ft.com/ get your session ID from cookies. Input into Jenkins build without `.env`
 
 ## Todo
-- Celebrate
 - New 48 hour view for realtime
 - Figure out why all users have to be in multiples of 20
 - Jenkins: if build fail, run Slack message `build failed!`
+- Celebrate
 
 ## Done
 - Ramp-up time functionality
@@ -51,6 +53,7 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - Complete refactor of code!
 - Put *Uuid.json into their own folder for neatness
 - New http websocket subscription
+- User and ramp up time option in Jenkins
 
 ## Notes
 - A group of `*Uuid.json` files should generate themselves due to a jenkins shell script. If not, you need to create `historicalUuid.json` and `realtimeUuid.json`
