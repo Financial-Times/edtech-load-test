@@ -15,4 +15,4 @@ curl -X POST -H "Content-Type:application/json" \
     --data '{ "text":"'"$TEXT"'", "username":"'"$USERNAME"'", "icon_emoji":"'"$ICON_EMOJI"'" }' $SLACK_CHANNEL_URL
 
 sleep $SLEEP_TIME
-mvn gatling:execute -Dgatling.simulationClass=LanternSimulation -Dusers=$ET_LANTERN_USERS -Dramp-up-seconds=$ET_RAMP_UP_SECONDS
+mvn gatling:execute -Dgatling.simulationClass=LanternSimulation
