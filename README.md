@@ -19,10 +19,17 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 
 ### Env File Population
 - `ET_HOME_CHANNEL` - the Slack channel to alert. This should not change often
-- `ET_LANTERN_USERS` - number of users to connect to Lantern. Input into Jenkins build without `.env` 
 - `ET_RAMP_UP_SECONDS` - amount of time users will take to login. Input into Jenkins build without `.env`
 - `ET_TEST_DURATION` - time for the tests to run, in seconds. Input into Jenkins build without `.env` 
 - `ET_SESSION_ID` - login to http://lantern.ft.com/ get your session ID from cookies. Input into Jenkins build without `.env`
+- `ET_HOME_USERS` - number of users to access home pages. Input into Jenkins build without `.env`
+- `ET_HISTORICAL_USERS` - number of users to access historical pages. Input into Jenkins build without `.env` 
+- `ET_REALTIME_USERS` - number of users to access realtime pages. Input into Jenkins build without `.env`
+- `ET_SECTIONS_USERS` - number of users to access sections pages. Input into Jenkins build without `.env`
+- `ET_TOPICS_USERS` - number of users to access topics pages. Input into Jenkins build without `.env`
+
+## Obsolete File Population
+- `ET_LANTERN_USERS` - number of users to connect to Lantern. Input into Jenkins build without `.env` 
 
 ## Todo
 - New 48 hour view for realtime
@@ -55,7 +62,7 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - New http websocket subscription
 - User and ramp up time option in Jenkins
 - Now using sections and topics generated from uuid
-- System.getenv
+- Put number of users for each type into `.env`
 
 ## Notes
 - A group of `*Uuid.json` files should generate themselves due to a jenkins shell script. If not, you need to create `historicalUuid.json`, `realtimeUuid.json`, `sectionsUuid.json`, and `topicsUuid.json`

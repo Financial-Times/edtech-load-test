@@ -9,6 +9,13 @@ import scala.concurrent.duration._
 
 class LanternSimulation extends Simulation {
 
+  val scnHistorical = scenario("Historical View")
+    .forever() {
+      feed(historicalFeeder.circular)
+        .exec(Historical.runner())
+        .pause(5, 10)
+    }
+
   val scnHome = scenario("Home View")
     .forever() {
       exec(Home.runner())
@@ -19,10 +26,10 @@ class LanternSimulation extends Simulation {
     .feed(realtimeFeeder.circular)
     .exec(Realtime.runner())
 
-  val scnHistorical = scenario("Historical View")
+  val scnSections = scenario("Sections View")
     .forever() {
-      feed(historicalFeeder.circular)
-        .exec(Historical.runner())
+      feed(sectionsFeeder.circular)
+      exec(Sections.runner())
         .pause(5, 10)
     }
 
@@ -33,23 +40,16 @@ class LanternSimulation extends Simulation {
         .pause(5, 10)
     }
 
-  val scnSections = scenario("Sections View")
-    .forever() {
-      feed(sectionsFeeder.circular)
-      exec(Sections.runner())
-        .pause(5, 10)
-    }
-
   val initialPage = http
     .baseURL(baseUrl)
     .wsBaseURL(wsBaseUrl)
 
   setUp(
     scnHome.inject(rampUsers(homeUsers) over (rampUp seconds)),
-    scnRealtime.inject(rampUsers(realtimeUsers) over (rampUp seconds)),
     scnHistorical.inject(rampUsers(historicalUsers) over (rampUp seconds)),
-    scnTopics.inject(rampUsers(topicsUsers) over (rampUp seconds)),
-    scnSections.inject(rampUsers(sectionsUsers) over (rampUp seconds))
+    scnRealtime.inject(rampUsers(realtimeUsers) over (rampUp seconds)),
+    scnSections.inject(rampUsers(sectionsUsers) over (rampUp seconds)),
+    scnTopics.inject(rampUsers(topicsUsers) over (rampUp seconds))
   ).protocols(initialPage).maxDuration(testDuration seconds)
 
 }

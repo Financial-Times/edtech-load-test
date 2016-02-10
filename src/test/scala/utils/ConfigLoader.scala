@@ -15,27 +15,33 @@ object ConfigLoader {
   val testDuration = System.getenv("ET_TEST_DURATION").toInt
   val sessionID : String = System.getenv("ET_SESSION_ID")
 
-  val homeUsers = math.ceil(numUsers/10).toInt
-  val realtimeUsers = math.ceil(numUsers*0.6).toInt
-  val historicalUsers = math.ceil(numUsers/5).toInt
-  val topicsUsers = math.ceil(numUsers/20).toInt
-  val sectionsUsers = math.ceil(numUsers/20).toInt
+  val homeUsers = System.getenv("ET_HOME_USERS").toInt
+  val historicalUsers = System.getenv("ET_HISTORICAL_USERS").toInt
+  val realtimeUsers = System.getenv("ET_REALTIME_USERS").toInt
+  val sectionsUsers = System.getenv("ET_SECTIONS_USERS").toInt
+  val topicsUsers = System.getenv("ET_TOPICS_USERS").toInt
 
+//  val homeUsers = math.ceil(numUsers/10).toInt
+//  val historicalUsers = math.ceil(numUsers/5).toInt
+//  val realtimeUsers = math.ceil(numUsers*0.6).toInt
+//  val sectionsUsers = math.ceil(numUsers/20).toInt
+//  val topicsUsers = math.ceil(numUsers/20).toInt
 
-  def realtimeFeeder() : Array[Map[String,String]] = {
-    generateUuidFeeder(readUuidListFromFile("./src/test/resources/uuid/realtimeUuid.json"))
-  }
 
   def historicalFeeder() : Array[Map[String,String]] = {
     generateUuidFeeder(readUuidListFromFile("./src/test/resources/uuid/historicalUuid.json"))
   }
 
-  def topicsFeeder() : Array[Map[String,String]] = {
-    generateUuidFeeder(readUuidListFromFile("./src/test/resources/uuid/topicsUuid.json"))
+  def realtimeFeeder() : Array[Map[String,String]] = {
+    generateUuidFeeder(readUuidListFromFile("./src/test/resources/uuid/realtimeUuid.json"))
   }
 
   def sectionsFeeder() : Array[Map[String,String]] = {
     generateUuidFeeder(readUuidListFromFile("./src/test/resources/uuid/sectionsUuid.json"))
+  }
+
+  def topicsFeeder() : Array[Map[String,String]] = {
+    generateUuidFeeder(readUuidListFromFile("./src/test/resources/uuid/topicsUuid.json"))
   }
 
   private def generateUuidFeeder(uuidList:List[String]): Array[Map[String,String]] ={
