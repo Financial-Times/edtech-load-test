@@ -3,7 +3,8 @@
 export $(cat .env)
 
 SLEEP_TIME=10
-TEXT="In $SLEEP_TIME seconds: Running $ET_LANTERN_USERS users through Lantern over $ET_RAMP_UP_SECONDS secs. Expect a report in approximately $ET_TEST_DURATION seconds."
+TOTAL_USERS=$(($ET_HOME_USERS + $ET_HISTORICAL_USERS + $ET_REALTIME_USERS + $ET_SECTIONS_USERS + $ET_TOPICS_USERS))
+TEXT="In $SLEEP_TIME seconds: Running $TOTAL_USERS users through Lantern over $ET_RAMP_UP_SECONDS secs. Expect a report in approximately $ET_TEST_DURATION seconds."
 USERNAME="gatling-bot"
 ICON_EMOJI=":gatling:"
 
