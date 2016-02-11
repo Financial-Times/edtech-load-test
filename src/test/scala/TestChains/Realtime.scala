@@ -35,10 +35,6 @@ object Realtime {
       .exec(http("HTTP: Confirm subscription")
         .get("/socket.io/?EIO=3&transport=polling&t=" + "LA2" + RandomGenerator.string(4) + "&sid=${sid}")
         .check(status.is(200)))
-      .exec(http("HTTP: POST Subscribe to article")
-        .post("/socket.io/?EIO=3&transport=polling&t=" + "LA2" + RandomGenerator.string(4) + "&sid=${sid}")
-        .body(StringBody("33:42[\"unsubscribeFromArticle\",null]88:42[\"subscribeToArticle\",{\"uuid\":\"${uuid}\",\"timespan\":\"1h\"}]"))
-        .check(status.is(200)))
 
       .exec(ws("Web Socket: Connect").open("/?EIO=3&transport=websocket&sid=${sid}"))
       .exec(ws("Web Socket: Send 2probe").sendText("2probe").check(wsAwait.within(3).until(1).regex("3probe")))
