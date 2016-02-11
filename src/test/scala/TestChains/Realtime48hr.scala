@@ -40,9 +40,7 @@ object Realtime48hr {
       .exec(ws("Web Socket: Send 5 (48hr)").sendText("5"))
 
       .forever() {
-        exec(repeat(5) {
-          exec(ws("Web Socket: 42 Response (48hr)").check(wsAwait.within(30).until(1).regex("(42.*)")))
-        })
+          exec(ws("Web Socket: 42 Response (48hr)").check(wsAwait.within(120).until(1).regex("(42.*)")))
           .exec(ws("Web Socket: Send 2, Receive 3 (48hr)").sendText("2").check(wsAwait.within(3).until(1).regex("3")))
       }
   }
