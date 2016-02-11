@@ -25,6 +25,7 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - `ET_HOME_USERS` - number of users to access home pages. Input into Jenkins build without `.env`
 - `ET_HISTORICAL_USERS` - number of users to access historical pages. Input into Jenkins build without `.env` 
 - `ET_REALTIME_USERS` - number of users to access realtime pages. Input into Jenkins build without `.env`
+- `ET_REALTIME48_USERS` - number of users to access realtime pages. Input into Jenkins build without `.env`
 - `ET_SECTIONS_USERS` - number of users to access sections pages. Input into Jenkins build without `.env`
 - `ET_TOPICS_USERS` - number of users to access topics pages. Input into Jenkins build without `.env`
 
@@ -32,8 +33,6 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - `ET_LANTERN_USERS` - number of users to connect to Lantern. Input into Jenkins build without `.env` 
 
 ## Todo
-- New 48 hour view for realtime
-- Figure out why all users have to be in multiples of 20
 - Jenkins: if build fail, run Slack message `build failed!`
 - Celebrate
 
@@ -63,6 +62,7 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - User and ramp up time option in Jenkins
 - Now using sections and topics generated from uuid
 - Put number of users for each type into `.env`
+- New 48 hour view for realtime
 
 ## Notes
 - A group of `*Uuid.json` files should generate themselves due to a jenkins shell script. If not, you need to create `historicalUuid.json`, `realtimeUuid.json`, `sectionsUuid.json`, and `topicsUuid.json`
