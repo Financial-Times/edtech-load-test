@@ -33,6 +33,7 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - `ET_LANTERN_USERS` - number of users to connect to Lantern. Input into Jenkins build without `.env` 
 
 ## Todo
+- Pick of the Day page
 - Jenkins: if build fail, run Slack message `build failed!`
 - Celebrate
 
