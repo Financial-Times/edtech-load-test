@@ -17,16 +17,11 @@ object ConfigLoader {
 
   val homeUsers = System.getenv("ET_HOME_USERS").toInt
   val historicalUsers = System.getenv("ET_HISTORICAL_USERS").toInt
+  val pickOfTheDayUsers = System.getenv("ET_PICKOFTHEDAY_USERS").toInt
   val realtimeUsers = System.getenv("ET_REALTIME_USERS").toInt
   val realtime48Users = System.getenv("ET_REALTIME48_USERS").toInt
   val sectionsUsers = System.getenv("ET_SECTIONS_USERS").toInt
   val topicsUsers = System.getenv("ET_TOPICS_USERS").toInt
-
-//  val homeUsers = math.ceil(numUsers/10).toInt
-//  val historicalUsers = math.ceil(numUsers/5).toInt
-//  val realtimeUsers = math.ceil(numUsers*0.6).toInt
-//  val sectionsUsers = math.ceil(numUsers/20).toInt
-//  val topicsUsers = math.ceil(numUsers/20).toInt
 
 
   def historicalFeeder() : Array[Map[String,String]] = {
