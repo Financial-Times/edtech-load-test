@@ -15,6 +15,7 @@ object Topics {
       .exec(http("Page: Topics")
         .get(url)
         .check(currentLocation.is(urlConcat))
+        .check(css("#react-app"))
         .check(status.is(200)))
   }
 }

@@ -15,6 +15,7 @@ object Home {
       .exec(http("Page: Home")
         .get(url)
         .check(currentLocation.is(urlConcat))
+        .check(css("#react-app"))
         .check(status.is(200)))
   }
 }

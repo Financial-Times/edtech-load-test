@@ -16,6 +16,7 @@ object Realtime48hr {
       .exec(http("Page: Realtime (48hr)")
         .get(url)
         .check(currentLocation.is(urlConcat))
+        .check(css("#react-app"))
         .check(status.is(200)))
       .exec(http("HTTP: Get Timespan (48hr)")
         .get("https://lantern.ft.com/api/v0/realtime/articles/${uuid}?timespan=48h")

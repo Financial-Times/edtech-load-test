@@ -15,7 +15,7 @@ object Historical {
       .exec(http("Page: Historical")
         .get(url)
         .check(currentLocation.is(urlConcat))
-        .check(css("#mapContainer"))
+        .check(css("#react-app"))
         .check(status.is(200)))
   }
 }

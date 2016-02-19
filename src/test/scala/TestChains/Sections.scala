@@ -15,6 +15,7 @@ object Sections {
       .exec(http("Page: Sections")
         .get(url)
         .check(currentLocation.is(urlConcat))
+        .check(css("#react-app"))
         .check(status.is(200)))
   }
 }

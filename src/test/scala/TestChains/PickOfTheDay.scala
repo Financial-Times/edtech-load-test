@@ -15,7 +15,7 @@ object PickOfTheDay {
       .exec(http("Page: Pick of the Day")
         .get(url)
         .check(currentLocation.is(urlConcat))
-        .check(css("div[data-component=\"Top5FromSearchEngines\"]"))
+        .check(css("#react-app"))
         .check(status.is(200)))
   }
 }
