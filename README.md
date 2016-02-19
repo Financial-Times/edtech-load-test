@@ -9,11 +9,9 @@ We need load tests for our products and services. This aims to provide.
 Git, Java, Maven. Everything else should download the first time you run the test, thanks to Maven.
 
 ## How?
+- Login to http://lantern.ft.com/ manually to get your session ID from cookies
 - Create an `.env` file in the project's home directory
 - Populate the `.env` file (see below)
-- Login to http://lantern.ft.com/ get your session ID from cookies
-- Place session ID into `src/test/scala/utils/ArticleValues.scala`
-- Modify `RunLanternAccessSimulation.sh` if you need to change how many users login, ramp-up time, etc 
 - Run `sh RunLanternAccessSimulation.sh`
 - Reports can be found in `target/gatling/results`
 

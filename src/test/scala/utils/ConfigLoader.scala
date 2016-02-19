@@ -10,7 +10,6 @@ object ConfigLoader {
   val wsBaseUrl = "wss://lantern.ft.com/socket.io"
   val perfTestID = "?PerfTestLantern"
 
-//  val numUsers = System.getenv("ET_LANTERN_USERS").toInt
   val rampUp = System.getenv("ET_RAMP_UP_SECONDS").toInt
   val testDuration = System.getenv("ET_TEST_DURATION").toInt
   val sessionID : String = System.getenv("ET_SESSION_ID")
