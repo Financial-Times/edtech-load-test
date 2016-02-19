@@ -22,6 +22,12 @@ class LanternSimulation extends Simulation {
         .pause(5, 10)
     }
 
+  val scnPickOfTheDay = scenario("Pick of the Day View")
+    .forever() {
+      exec(PickOfTheDay.runner())
+        .pause(5, 10)
+    }
+
   val scnRealtime = scenario("Realtime 1hr View")
     .feed(realtimeFeeder.circular)
     .exec(Realtime.runner())
@@ -51,6 +57,7 @@ class LanternSimulation extends Simulation {
   setUp(
     scnHome.inject(rampUsers(homeUsers) over (rampUp seconds)),
     scnHistorical.inject(rampUsers(historicalUsers) over (rampUp seconds)),
+    scnPickOfTheDay.inject(rampUsers(pickOfTheDayUsers) over (rampUp seconds)),
     scnRealtime.inject(rampUsers(realtimeUsers) over (rampUp seconds)),
     scnRealtime48.inject(rampUsers(realtime48Users) over (rampUp seconds)),
     scnSections.inject(rampUsers(sectionsUsers) over (rampUp seconds)),
