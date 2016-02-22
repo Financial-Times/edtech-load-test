@@ -30,11 +30,11 @@ class LanternSimulation extends Simulation {
 
   val scnRealtime = scenario("Realtime 1hr View")
     .feed(realtimeFeeder.circular)
+    .roundRobinSwitch(
+      Realtime.runner(),
+      Realtime48hr.runner()
+    )
     .exec(Realtime.runner())
-
-  val scnRealtime48 = scenario("Realtime 48hr View")
-    .feed(realtimeFeeder.circular)
-    .exec(Realtime48hr.runner())
 
   val scnSections = scenario("Sections View")
     .forever() {
@@ -59,7 +59,6 @@ class LanternSimulation extends Simulation {
     scnHistorical.inject(rampUsers(historicalUsers) over (rampUp seconds)),
     scnPickOfTheDay.inject(rampUsers(pickOfTheDayUsers) over (rampUp seconds)),
     scnRealtime.inject(rampUsers(realtimeUsers) over (rampUp seconds)),
-    scnRealtime48.inject(rampUsers(realtime48Users) over (rampUp seconds)),
     scnSections.inject(rampUsers(sectionsUsers) over (rampUp seconds)),
     scnTopics.inject(rampUsers(topicsUsers) over (rampUp seconds))
   ).protocols(initialPage).maxDuration(testDuration seconds)

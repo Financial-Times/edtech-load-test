@@ -24,7 +24,6 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - `ET_HISTORICAL_USERS` - number of users to access historical pages. Input into Jenkins build without `.env`
 - `ET_PICKOFTHEDAY_USERS` - number of users to access the pick of the day page. Input into Jenkins build without `.env` 
 - `ET_REALTIME_USERS` - number of users to access realtime pages. Input into Jenkins build without `.env`
-- `ET_REALTIME48_USERS` - number of users to access realtime pages. Input into Jenkins build without `.env`
 - `ET_SECTIONS_USERS` - number of users to access sections pages. Input into Jenkins build without `.env`
 - `ET_TOPICS_USERS` - number of users to access topics pages. Input into Jenkins build without `.env`
 
@@ -63,6 +62,7 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - Put number of users for each type into `.env`
 - New 48 hour view for realtime
 - Pick of the Day page
+- Combined 1h and 48h realtime views
 
 ## Notes
 - A group of `*Uuid.json` files should generate themselves due to a jenkins shell script. If not, you need to create `historicalUuid.json`, `realtimeUuid.json`, `sectionsUuid.json`, and `topicsUuid.json`

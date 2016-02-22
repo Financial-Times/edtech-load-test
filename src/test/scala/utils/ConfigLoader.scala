@@ -18,7 +18,6 @@ object ConfigLoader {
   val historicalUsers = System.getenv("ET_HISTORICAL_USERS").toInt
   val pickOfTheDayUsers = System.getenv("ET_PICKOFTHEDAY_USERS").toInt
   val realtimeUsers = System.getenv("ET_REALTIME_USERS").toInt
-  val realtime48Users = System.getenv("ET_REALTIME48_USERS").toInt
   val sectionsUsers = System.getenv("ET_SECTIONS_USERS").toInt
   val topicsUsers = System.getenv("ET_TOPICS_USERS").toInt
 
