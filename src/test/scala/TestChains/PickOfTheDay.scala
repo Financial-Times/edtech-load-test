@@ -7,7 +7,7 @@ import utils.ConfigLoader
 
 object PickOfTheDay {
 
-  val url = "/pickoftheday" + ConfigLoader.perfTestID
+  val url = "/thehighlights" + ConfigLoader.perfTestID
   val urlConcat = ConfigLoader.baseUrl.concat(url)
 
   def runner(): ChainBuilder = {

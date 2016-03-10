@@ -7,7 +7,7 @@ import utils.ConfigLoader
 
 object Historical {
 
-  val url = "/articles/${uuid}/global/FT" + ConfigLoader.perfTestID
+  val url = "/articles/${uuid}/48" + ConfigLoader.perfTestID
   val urlConcat = ConfigLoader.baseUrl.concat(url)
 
   def runner(): ChainBuilder = {

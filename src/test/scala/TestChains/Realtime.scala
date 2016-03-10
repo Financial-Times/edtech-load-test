@@ -9,7 +9,7 @@ import utils.RandomGenerator
 
 object Realtime {
 
-  val url = "/realtime/articles/${uuid}" + ConfigLoader.perfTestID
+  val url = "/realtime/articles/${uuid}/1h" + ConfigLoader.perfTestID
   val urlConcat = ConfigLoader.baseUrl.concat(url)
 
   def runner(): ChainBuilder = {
