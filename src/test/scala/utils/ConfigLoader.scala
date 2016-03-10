@@ -23,19 +23,29 @@ object ConfigLoader {
 
 
   def historicalFeeder() : Array[Map[String,String]] = {
-    generateUuidFeeder(readUuidListFromFile("./src/test/resources/uuid/historicalUuid.json"))
+    generateUuidFeeder(readFeederListFromFile("./src/test/resources/uuid/historicalUuid.json"))
   }
 
   def realtimeFeeder() : Array[Map[String,String]] = {
-    generateUuidFeeder(readUuidListFromFile("./src/test/resources/uuid/realtimeUuid.json"))
+    generateUuidFeeder(readFeederListFromFile("./src/test/resources/uuid/realtimeUuid.json"))
   }
 
   def sectionsFeeder() : Array[Map[String,String]] = {
-    generateUuidFeeder(readUuidListFromFile("./src/test/resources/uuid/sectionsUuid.json"))
+    generateUrlPageFeeder(readFeederListFromFile("./src/test/resources/uuid/sectionsUuid.json"))
   }
 
   def topicsFeeder() : Array[Map[String,String]] = {
-    generateUuidFeeder(readUuidListFromFile("./src/test/resources/uuid/topicsUuid.json"))
+    generateUrlPageFeeder(readFeederListFromFile("./src/test/resources/uuid/topicsUuid.json"))
+  }
+
+  private def generateUrlPageFeeder(uuidList:List[String]): Array[Map[String,String]] ={
+    var array = Array[Map[String,String]]()
+
+    uuidList.foreach{s =>
+      array = array :+ Map("urlPage" -> s.replace(" ","%20"))
+    }
+
+    return array
   }
 
   private def generateUuidFeeder(uuidList:List[String]): Array[Map[String,String]] ={
@@ -48,15 +58,15 @@ object ConfigLoader {
     return array
   }
 
-  private def readUuidListFromFile(fileName:String): List[String] = {
+  private def readFeederListFromFile(fileName:String): List[String] = {
     val source = scala.io.Source.fromFile(fileName)
     val lines = try source.mkString finally source.close()
     val json = parse(lines)
 
     for {
       JObject(documents) <- json
-      JField("key", JString(uuid))  <- documents
-    } yield uuid
+      JField("key", JString(feederItem))  <- documents
+    } yield feederItem
   }
 
 }

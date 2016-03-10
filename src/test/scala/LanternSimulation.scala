@@ -39,14 +39,14 @@ class LanternSimulation extends Simulation {
   val scnSections = scenario("Sections View")
     .forever() {
       feed(sectionsFeeder.circular)
-      exec(Sections.runner())
+        .exec(Sections.runner())
         .pause(5, 10)
     }
 
   val scnTopics = scenario("Topics View")
     .forever() {
       feed(topicsFeeder.circular)
-      exec(Topics.runner())
+        .exec(Topics.runner())
         .pause(5, 10)
     }
 

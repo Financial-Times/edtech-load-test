@@ -7,7 +7,7 @@ import utils.ConfigLoader
 
 object Topics {
 
-  val url = "/topics/Oil" + ConfigLoader.perfTestID
+  val url = "/topics/${urlPage}/168" + ConfigLoader.perfTestID
   val urlConcat = ConfigLoader.baseUrl.concat(url)
 
   def runner(): ChainBuilder = {

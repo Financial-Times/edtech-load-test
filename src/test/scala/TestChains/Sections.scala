@@ -7,8 +7,8 @@ import utils.ConfigLoader
 
 object Sections {
 
-  val url = "/sections/UK" + ConfigLoader.perfTestID
-  val urlConcat = ConfigLoader.baseUrl.concat(url)
+  val url = "/sections/${urlPage}/168" + ConfigLoader.perfTestID
+  val urlConcat = ConfigLoader.baseUrl.concat(url.replaceAll(" ","%20"))
 
   def runner(): ChainBuilder = {
     exec(addCookie(Cookie("connect.sid", ConfigLoader.sessionID)))
