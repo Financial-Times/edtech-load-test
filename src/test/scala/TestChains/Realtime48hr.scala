@@ -19,7 +19,7 @@ object Realtime48hr {
         .check(css("#react-app"))
         .check(status.is(200)))
       .exec(http("HTTP: Get Timespan (48hr)")
-        .get("https://lantern.ft.com/api/v0/realtime/articles/${uuid}?timespan=48h")
+        .get("/api/v0/realtime/articles/${uuid}?timespan=48h")
         .check(status.is(200)))
       .exec(http("HTTP: Get SID (48hr)")
         .get("/socket.io/?EIO=3&transport=polling&t=" + "LDX" + RandomGenerator.string(4))

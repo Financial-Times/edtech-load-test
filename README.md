@@ -16,7 +16,7 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - Reports can be found in `target/gatling/results`
 
 ### Env File Population
-- `ET_HOME_CHANNEL` - the Slack channel to alert. This should not change often
+- `ET_HOME_CHANNEL` - the Slack channel to alert. This should not change
 - `ET_RAMP_UP_SECONDS` - amount of time users will take to login. Input into Jenkins build without `.env`
 - `ET_TEST_DURATION` - time for the tests to run, in seconds. Input into Jenkins build without `.env` 
 - `ET_SESSION_ID` - login to http://lantern.ft.com/ get your session ID from cookies. Input into Jenkins build without `.env`
@@ -26,6 +26,9 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - `ET_REALTIME_USERS` - number of users to access realtime pages. Input into Jenkins build without `.env`
 - `ET_SECTIONS_USERS` - number of users to access sections pages. Input into Jenkins build without `.env`
 - `ET_TOPICS_USERS` - number of users to access topics pages. Input into Jenkins build without `.env`
+- `ET_LANTERN_URL` - Lantern URL to test against. Input into Jenkins build without `.env`
+- `ET_LANTERN_WEBSOCKET` - Websocket URL to test against. Input into Jenkins build without `.env`
+- `ET_PERF_TEST_ID` - Performance suffix to append to the end of the each URL, ensuring that the performance test is searchable in Splunk. Input into Jenkins build without `.env`
 
 ## Obsolete File Population
 - `ET_LANTERN_USERS` - number of users to connect to Lantern. Input into Jenkins build without `.env` 
@@ -63,6 +66,7 @@ Git, Java, Maven. Everything else should download the first time you run the tes
 - New 48 hour view for realtime
 - Pick of the Day page
 - Combined 1h and 48h realtime views
+- Adapted Lantern URL to be changeable
 
 ## Notes
 - A group of `*Uuid.json` files should generate themselves due to a jenkins shell script. If not, you need to create `historicalUuid.json`, `realtimeUuid.json`, `sectionsUuid.json`, and `topicsUuid.json`

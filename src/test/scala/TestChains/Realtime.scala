@@ -20,7 +20,7 @@ object Realtime {
         .check(css("#react-app"))
         .check(status.is(200)))
       .exec(http("HTTP: Get Timespan")
-        .get("https://lantern.ft.com/api/v0/realtime/articles/${uuid}?timespan=1h")
+        .get("/api/v0/realtime/articles/${uuid}?timespan=1h")
         .check(status.is(200)))
       .exec(http("HTTP: Get SID")
         .get("/socket.io/?EIO=3&transport=polling&t=" + "LA2" + RandomGenerator.string(4))

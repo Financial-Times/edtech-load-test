@@ -6,9 +6,9 @@ import org.json4s.native.JsonMethods._
 
 object ConfigLoader {
 
-  val baseUrl = "http://lantern.ft.com"
-  val wsBaseUrl = "wss://lantern.ft.com/socket.io"
-  val perfTestID = "?PerfTestLantern"
+  val baseUrl : String = System.getenv("ET_LANTERN_URL")
+  val wsBaseUrl : String = System.getenv("ET_LANTERN_WEBSOCKET")
+  val perfTestID : String = System.getenv("ET_PERF_TEST_ID")
 
   val rampUp = System.getenv("ET_RAMP_UP_SECONDS").toInt
   val testDuration = System.getenv("ET_TEST_DURATION").toInt
