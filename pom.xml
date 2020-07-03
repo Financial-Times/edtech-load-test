@@ -23,7 +23,7 @@
         <gatling-plugin.version>2.1.7</gatling-plugin.version>
         <scala-maven-plugin.version>3.2.2</scala-maven-plugin.version>
         <scala.version>2.11.7</scala.version>
-        <json4s.version>3.3.0</json4s.version>
+        <json4s.version>3.6.8</json4s.version>
     </properties>
 
     <dependencies>
